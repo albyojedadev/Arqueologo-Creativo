@@ -1,5 +1,5 @@
-# 💎 Arqueólogo Creativo: Sistema de Asignación de Recursos y Rescate de Activos
-### *Creative Archaeologist: Evidence-Based Asset Discovery & Resource Allocation Engine*
+# 💎 Arqueólogo Creativo: Rescata los Diamantes de tu Cajón
+### *Creative Archaeologist: Unearth the Hidden Diamonds in Your Vault*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Language: ES/EN](https://img.shields.io/badge/Language-Spanish%20%7C%20English-blue.svg)](#)

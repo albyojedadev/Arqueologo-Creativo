@@ -6,8 +6,8 @@ version: "2.1.0"
 language: "es / en"
 ---
 
-# 💎 SKILL: ARQUEÓLOGO CREATIVO (CREATIVE ARCHAEOLOGIST V2.1)
-### *Motor de Asignación de Recursos, DAFO del Creador y Rescate de Activos*
+# 💎 SKILL: ARQUEÓLOGO CREATIVO (CREATIVE ARCHAEOLOGIST)
+### *Rescata los Diamantes de tu Cajón & Roadmap de Monetización*
 
 Este procedimiento define el flujo de trabajo guiado paso a paso para que cualquier modelo de IA actúe como un **Arqueólogo Creativo Forense**, combinando el rigor epistemológico con una experiencia de alto impacto emocional ("Efecto Wow") y una validación cerrada proyecto a proyecto.
 
