@@ -1,0 +1,50 @@
+{
+  "profile": {
+    "name": "Nombre o Estudio",
+    "core_specialty": "Especialidad principal (ej. Diseño Narrativo / Guion / Fullstack)",
+    "target_industries": ["Videojuegos", "Audiovisual", "SaaS B2B"],
+    "monthly_target_revenue_eur": 5000,
+    "max_concurrent_projects": 3,
+    "protected_ip_time_percentage": 20
+  },
+  "financial_floors": {
+    "baseline_hourly_rate_eur": 75,
+    "minimum_project_ticket_eur": 1500,
+    "upfront_retainer_percentage": 50,
+    "out_of_scope_hourly_rate_eur": 85,
+    "standard_services": {
+      "strategy_diagnosis": {
+        "name": "Diagnóstico / Consultoría Estratégica (1-2h)",
+        "base_price_eur": 350
+      },
+      "scoped_deliverable": {
+        "name": "Entregable Acotado (Guion, GDD, Landing Page, Auditoría)",
+        "base_price_eur": 2500
+      },
+      "full_project": {
+        "name": "Dirección Integral / Desarrollo Completo",
+        "base_price_eur": 7500
+      }
+    }
+  },
+  "friction_multipliers": {
+    "packaged_asset": 1.0,
+    "standard_b2b": 1.5,
+    "complex_experimental": 2.0,
+    "heavy_bureaucracy": 2.5
+  },
+  "red_flags": [
+    "es_algo_rapido_facil",
+    "pago_en_visibilidad_o_promesas",
+    "sin_presupuesto_declarado",
+    "urgencia_extrema_sin_recargo",
+    "multiples_decisores_sin_consenso",
+    "rechazo_al_anticipo"
+  ],
+  "standard_clauses": {
+    "max_review_rounds": 2,
+    "client_feedback_sla_days": 7,
+    "ip_transfer_condition": "100% payment received",
+    "kill_fee_applicable": true
+  }
+}
