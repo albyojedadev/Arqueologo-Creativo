@@ -1,0 +1,16 @@
+# Entornos y dependencias
+node_modules/
+__pycache__/
+*.pyc
+.env
+.env.local
+
+# Documentación interna y demos privadas de clientes
+DOCS/
+docs_private/
+*.pdf
+
+# Salidas de datos temporales
+inventario.json
+inventory.json
+*.log
