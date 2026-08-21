@@ -1,30 +1,27 @@
 {
   "profile": {
-    "name": "Nombre o Estudio",
-    "core_specialty": "Especialidad principal (ej. Diseño Narrativo / Guion / Fullstack)",
-    "target_industries": ["Videojuegos", "Audiovisual", "SaaS B2B"],
-    "monthly_target_revenue_eur": 5000,
+    "name": "Nombre o Estudio del Creador",
+    "creative_discipline": "Disciplina Creativa / Especialidad (ej. Guion, Game Design, Software, Diseño, Copywriting)",
+    "core_specialty": "Propuesta de Valor Única",
+    "target_industries": ["Industria 1", "Industria 2", "Industria 3"],
+    "monthly_target_revenue_eur": 4500,
     "max_concurrent_projects": 3,
     "protected_ip_time_percentage": 20
+  },
+  "industry_benchmarks": {
+    "reference_entity_or_union": "Convenio o Entidad de Referencia del Sector (ej. ALMA, FADIP, WGA, CODEX)",
+    "official_rates_link": "https://enlace-al-convenio-o-baremo.org",
+    "use_as_anchor": true
   },
   "financial_floors": {
     "baseline_hourly_rate_eur": 75,
     "minimum_project_ticket_eur": 1500,
-    "upfront_retainer_percentage": 50,
+    "paid_discovery_base_eur": 450,
     "out_of_scope_hourly_rate_eur": 85,
-    "standard_services": {
-      "strategy_diagnosis": {
-        "name": "Diagnóstico / Consultoría Estratégica (1-2h)",
-        "base_price_eur": 350
-      },
-      "scoped_deliverable": {
-        "name": "Entregable Acotado (Guion, GDD, Landing Page, Auditoría)",
-        "base_price_eur": 2500
-      },
-      "full_project": {
-        "name": "Dirección Integral / Desarrollo Completo",
-        "base_price_eur": 7500
-      }
+    "payment_milestones": {
+      "milestone_1_upfront_pct": 30,
+      "milestone_2_structure_pct": 40,
+      "milestone_3_final_delivery_pct": 30
     }
   },
   "friction_multipliers": {
@@ -33,18 +30,45 @@
     "complex_experimental": 2.0,
     "heavy_bureaucracy": 2.5
   },
+  "custom_services": [
+    {
+      "id": "paid_discovery",
+      "name": "Informe de Paid Discovery / Diagnóstico de Viabilidad",
+      "min_eur": 350,
+      "normal_eur": 500,
+      "disuasorio_eur": 850,
+      "description": "Auditoría previa de viabilidad, arquitectura técnica/narrativa y hoja de ruta."
+    },
+    {
+      "id": "core_service_scoped",
+      "name": "Servicio Núcleo Acotado",
+      "min_eur": 1500,
+      "normal_eur": 2500,
+      "disuasorio_eur": 4000,
+      "description": "Entregable cerrado con 2 rondas de revisión incluidas."
+    },
+    {
+      "id": "full_project_direction",
+      "name": "Dirección Integral / Proyecto Completo",
+      "min_eur": 3500,
+      "normal_eur": 6000,
+      "disuasorio_eur": 10000,
+      "description": "Desarrollo integral de principio a fin con hitos de entrega garantizados."
+    }
+  ],
   "red_flags": [
     "es_algo_rapido_facil",
     "pago_en_visibilidad_o_promesas",
     "sin_presupuesto_declarado",
-    "urgencia_extrema_sin_recargo",
-    "multiples_decisores_sin_consenso",
+    "peticion_de_arquitectura_o_presupuesto_complejo_sin_paid_discovery",
+    "urgencia_ficticia_con_feedback_lento",
+    "dedicacion_completa_encubierta_baja",
     "rechazo_al_anticipo"
   ],
   "standard_clauses": {
     "max_review_rounds": 2,
     "client_feedback_sla_days": 7,
-    "ip_transfer_condition": "100% payment received",
+    "ip_transfer_condition": "100% pago recibido y liquidado",
     "kill_fee_applicable": true
   }
 }
