@@ -56,7 +56,7 @@ El asistente **DEBE presentar el siguiente mensaje exacto al usuario**:
 
 ---
 
-## 💥 FASE 2: LA RADIOGRAFÍA DAFO DEL CREADOR (EL "EFECTO WOW")
+## 💥 FASE 2: LA RADIOGRAFÍA DAFO DEL CREADOR (AUDITORÍA DE IMPACTO)
 
 Antes de entrar en el detalle fino de cada proyecto, el sistema genera la **Radiografía DAFO Integral de la Trayectoria del Creador**:
 * **🌟 FORTALEZAS (Superpoderes Demostrados):** Competencias cruzadas únicas, activos terminados de alto valor y tracción histórica contrastada.
