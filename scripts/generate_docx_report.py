@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 import re
 import docx
 from docx import Document
@@ -11,12 +12,10 @@ from docx.oxml.ns import nsdecls
 
 sys.stdout.reconfigure(encoding='utf-8')
 
-# Colores Ejecutivos
 COLOR_PRIMARY = RGBColor(26, 36, 56)      # Navy #1A2438
-COLOR_SECONDARY = RGBColor(180, 115, 30)  # Oro/Bronce #B4731E
-COLOR_DARK = RGBColor(45, 55, 72)         # Gris oscuro #2D3748
-COLOR_MUTED = RGBColor(113, 128, 150)     # Gris medio #718096
-COLOR_ACCENT = RGBColor(197, 48, 48)      # Rojo Alerta #C53030
+COLOR_SECONDARY = RGBColor(180, 115, 30)  # Gold/Bronze #B4731E
+COLOR_DARK = RGBColor(45, 55, 72)         # Dark Gray #2D3748
+COLOR_MUTED = RGBColor(113, 128, 150)     # Medium Gray #718096
 
 def set_cell_background(cell, hex_color):
     tcPr = cell._element.get_or_add_tcPr()
@@ -28,15 +27,23 @@ def set_cell_margins(cell, top=120, bottom=120, left=140, right=140):
     tcMar = parse_xml(f'<w:tcMar {nsdecls("w")}><w:top w:w="{top}" w:type="dxa"/><w:bottom w:w="{bottom}" w:type="dxa"/><w:left w:w="{left}" w:type="dxa"/><w:right w:w="{right}" w:type="dxa"/></w:tcMar>')
     tcPr.append(tcMar)
 
+def clean_latex_formula(text):
+    """Converts raw LaTeX math expressions into clean readable text."""
+    t = text
+    t = re.sub(r'\\frac\{([^}]+)\}\{([^}]+)\}', r'(\1) / (\2)', t)
+    t = re.sub(r'\\text\{([^}]+)\}', r'\1', t)
+    t = t.replace(r'\times', '×').replace(r'\le', '≤').replace(r'\ge', '≥')
+    t = t.replace('$$', '').replace('$', '').strip()
+    return t
+
 def add_formatted_runs(paragraph, text, default_color=COLOR_DARK, default_size=Pt(10), is_bullet=False):
-    """Parsea markdown inline (**negrita**, *cursiva*, `código`) y añade runs limpios."""
-    # Eliminar posibles marcas de listas o comillas de citación residuales
     clean_text = text
     if is_bullet:
         clean_text = re.sub(r'^[\*\-\+]\s+', '', clean_text)
     
-    # Tokenizar para negrita y cursiva
-    # Regex para capturar **negrita**, *cursiva*, `código`
+    if '$' in clean_text:
+        clean_text = clean_latex_formula(clean_text)
+
     pattern = r'(\*\*.*?\*\*|\*.*?\*|`.*?`)'
     tokens = re.split(pattern, clean_text)
     
@@ -65,7 +72,6 @@ def add_formatted_runs(paragraph, text, default_color=COLOR_DARK, default_size=P
             font_size = Pt(9)
             color = COLOR_DARK
 
-        # Limpieza de corchetes de enlaces tipo [[Nota]] o [Texto](url)
         t_text = re.sub(r'\[\[(.*?)\]\]', r'\1', t_text)
         t_text = re.sub(r'\[(.*?)\]\(.*?\)', r'\1', t_text)
 
@@ -76,13 +82,13 @@ def add_formatted_runs(paragraph, text, default_color=COLOR_DARK, default_size=P
         r.font.italic = italic
         r.font.color.rgb = color
 
-def parse_markdown_file_to_docx(doc, filepath):
-    """Parsea completamente un archivo Markdown e inyecta elementos limpios en el documento Word."""
+def parse_markdown_to_docx(doc, filepath):
     with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
         content = f.read()
 
     lines = content.split('\n')
     in_code_block = False
+    is_mermaid_block = False
     code_block_lines = []
     in_table = False
     table_rows = []
@@ -90,7 +96,6 @@ def parse_markdown_file_to_docx(doc, filepath):
     def flush_table():
         nonlocal table_rows, in_table
         if table_rows:
-            # Filtrar filas vacías o malformadas
             valid_rows = [r for r in table_rows if len(r) > 1 or (len(r) == 1 and r[0] != '')]
             if valid_rows:
                 col_count = max(len(r) for r in valid_rows)
@@ -123,15 +128,13 @@ def parse_markdown_file_to_docx(doc, filepath):
     for line in lines:
         raw = line.strip()
 
-        # 1. Manejo de bloques de código / cajas ASCII ```
         if raw.startswith('```'):
             if in_code_block:
-                # Cerrar bloque de código: renderizar en una caja sombreada
-                if code_block_lines:
+                if code_block_lines and not is_mermaid_block:
                     t_box = doc.add_table(rows=1, cols=1)
                     t_box.alignment = WD_TABLE_ALIGNMENT.CENTER
                     cell = t_box.cell(0, 0)
-                    set_cell_background(cell, "F1F5F9") # Slate claro
+                    set_cell_background(cell, "F1F5F9")
                     set_cell_margins(cell, top=120, bottom=120, left=160, right=160)
                     p_box = cell.paragraphs[0]
                     p_box.paragraph_format.space_before = Pt(0)
@@ -145,19 +148,34 @@ def parse_markdown_file_to_docx(doc, filepath):
                     doc.add_paragraph()
                 code_block_lines = []
                 in_code_block = False
+                is_mermaid_block = False
             else:
                 if in_table:
                     flush_table()
                 in_code_block = True
+                if 'mermaid' in raw.lower():
+                    is_mermaid_block = True
             continue
 
         if in_code_block:
-            code_block_lines.append(line)
+            if not is_mermaid_block:
+                code_block_lines.append(line)
             continue
 
-        # 2. Manejo de Tablas Markdown
+        if raw.startswith('$$') and raw.endswith('$$'):
+            clean_form = clean_latex_formula(raw)
+            p_form = doc.add_paragraph()
+            p_form.paragraph_format.left_indent = Inches(0.5)
+            p_form.paragraph_format.space_before = Pt(6)
+            p_form.paragraph_format.space_after = Pt(6)
+            r_form = p_form.add_run("📐 " + clean_form)
+            r_form.font.name = "Arial"
+            r_form.font.size = Pt(10)
+            r_form.font.bold = True
+            r_form.font.color.rgb = COLOR_SECONDARY
+            continue
+
         if raw.startswith('|') and raw.endswith('|'):
-            # Ignorar separadores |---|---|
             if re.match(r'^\|[\s\-:|]+\|$', raw):
                 continue
             cells = [c.strip() for c in raw.split('|')[1:-1]]
@@ -170,7 +188,6 @@ def parse_markdown_file_to_docx(doc, filepath):
         if not raw:
             continue
 
-        # 3. Encabezados H1, H2, H3
         if raw.startswith('# '):
             h_text = raw.replace('# ', '').strip()
             h = doc.add_paragraph()
@@ -195,8 +212,6 @@ def parse_markdown_file_to_docx(doc, filepath):
             add_formatted_runs(h, h_text, default_color=COLOR_PRIMARY, default_size=Pt(11))
             for r in h.runs:
                 r.font.bold = True
-
-        # 4. Citas / Callouts (>)
         elif raw.startswith('> '):
             q_text = raw.replace('> ', '').strip()
             p = doc.add_paragraph()
@@ -206,23 +221,17 @@ def parse_markdown_file_to_docx(doc, filepath):
             add_formatted_runs(p, q_text, default_color=COLOR_SECONDARY, default_size=Pt(9.5))
             for r in p.runs:
                 r.font.italic = True
-
-        # 5. Listas con viñetas (- o *)
         elif raw.startswith('- ') or raw.startswith('* '):
             p = doc.add_paragraph(style='List Bullet')
             p.paragraph_format.space_before = Pt(1)
             p.paragraph_format.space_after = Pt(2)
             add_formatted_runs(p, raw, default_color=COLOR_DARK, default_size=Pt(9.5), is_bullet=True)
-
-        # 6. Listas numeradas (1. 2. etc)
         elif re.match(r'^\d+\.\s+', raw):
             p = doc.add_paragraph(style='List Number')
             p.paragraph_format.space_before = Pt(1)
             p.paragraph_format.space_after = Pt(2)
             item_text = re.sub(r'^\d+\.\s+', '', raw)
             add_formatted_runs(p, item_text, default_color=COLOR_DARK, default_size=Pt(9.5))
-
-        # 7. Separadores horizontales (---)
         elif raw in ['---', '***', '___']:
             p = doc.add_paragraph()
             p.paragraph_format.space_before = Pt(8)
@@ -230,8 +239,6 @@ def parse_markdown_file_to_docx(doc, filepath):
             r = p.add_run("─" * 45)
             r.font.color.rgb = COLOR_MUTED
             r.font.size = Pt(8)
-
-        # 8. Párrafos normales
         else:
             p = doc.add_paragraph()
             p.paragraph_format.space_after = Pt(5)
@@ -240,17 +247,20 @@ def parse_markdown_file_to_docx(doc, filepath):
     if in_table:
         flush_table()
 
-def generate_perfect_alby_docx():
+def generate_report(input_md, output_docx, author_name="Creador / Author"):
+    if not os.path.exists(input_md):
+        print(f"❌ Error: Input file not found: {input_md}")
+        return
+
     doc = Document()
     
-    # Márgenes de 1 pulgada
     for section in doc.sections:
         section.top_margin = Inches(1.0)
         section.bottom_margin = Inches(1.0)
         section.left_margin = Inches(1.0)
         section.right_margin = Inches(1.0)
 
-    # 1. PORTADA EDITORIAL IMPECABLE
+    # Portada Editorial Universal y Neutra
     p_sp = doc.add_paragraph()
     p_sp.paragraph_format.space_before = Pt(30)
 
@@ -262,28 +272,27 @@ def generate_perfect_alby_docx():
     r_badge.font.color.rgb = COLOR_SECONDARY
 
     p_tit = doc.add_paragraph()
-    r_tit = p_tit.add_run("INFORME MAESTRO DE AUDITORÍA FORENSE & RESCATE DE ACTIVOS")
+    r_tit = p_tit.add_run("ARQUEÓLOGO CREATIVO: RESCATA LOS DIAMANTES DE TU CAJÓN")
     r_tit.font.name = "Arial"
-    r_tit.font.size = Pt(22)
+    r_tit.font.size = Pt(21)
     r_tit.font.bold = True
     r_tit.font.color.rgb = COLOR_PRIMARY
     p_tit.paragraph_format.space_after = Pt(8)
 
     p_sub = doc.add_paragraph()
-    r_sub = p_sub.add_run("Dictamen Estratégico, Desentierro de IPs, Radiografía Financiera y Roadmap 2026–2027")
+    r_sub = p_sub.add_run("Auditoría Forense de Portafolio, Radiografía DAFO, Rescate de IPs y Roadmap de Monetización")
     r_sub.font.name = "Arial"
     r_sub.font.size = Pt(13)
     r_sub.font.color.rgb = COLOR_MUTED
     p_sub.paragraph_format.space_after = Pt(35)
 
-    # Tabla de Metadatos de Portada
-    t_meta = doc.add_table(rows=4, cols=2)
+    # Tabla Metadatos Universal
+    t_meta = doc.add_table(rows=3, cols=2)
     t_meta.alignment = WD_TABLE_ALIGNMENT.CENTER
     meta_info = [
-        ("AUTOR AUDITADO:", "Alby Ojeda (Guionista, Diseñador Narrativo & Creador)"),
-        ("TRIBUNAL AUDITOR:", "Panel de 6 Agentes (IP Scout, Crítico, Buyer Persona, Hater, Pricing, Psicólogo)"),
-        ("FECHA DE EMISIÓN:", "21 de Agosto de 2026"),
-        ("ALCANCE DEL ANÁLISIS:", "+300.000 archivos | 522 guiones | 10 años de facturas históricas")
+        ("AUTOR / ESTUDIO AUDITADO:", author_name),
+        ("TRIBUNAL AUDITOR:", "Panel de 6 Agentes (IP Scout, Crítico, Buyer Persona, Hater, Pricing, Operativo)"),
+        ("METODOLOGÍA:", "Evidencia Longitudinal + Embudo de Activos + Grafo Circular + Matriz IE")
     ]
     for idx, (lbl, val) in enumerate(meta_info):
         c1, c2 = t_meta.cell(idx, 0), t_meta.cell(idx, 1)
@@ -307,30 +316,16 @@ def generate_perfect_alby_docx():
 
     doc.add_page_break()
 
-    # 2. INGESTA Y PARSEO LIMPIO DE LOS 5 INFORMES MAESTROS
-    sources = [
-        r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\Estrategia\00_INFORME_MAESTRO_DEFINITIVO_Y_CALIBRADO.md",
-        r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\Estrategia\02_LISTA_DE_PRECIOS_REALISTA_2026.md",
-        r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\Estrategia\04_GUIA_MAESTRA_FILOSOFIA_LABORAL_Y_FILTRADO.md",
-        r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\05_DICTAMEN_DEMOLEDOR_CONSEJO_MAESTRO.md",
-        r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\2 Nivel Tactica\06_ROADMAP_ESTRATEGICO_PRODUCTOS_2026_2027.md"
-    ]
+    parse_markdown_to_docx(doc, input_md)
 
-    for s in sources:
-        if os.path.exists(s):
-            parse_markdown_file_to_docx(doc, s)
-            doc.add_page_break()
-
-    output_path = r"D:\PROYECTOS\_PANEL DE CONTROL_\_MASTER PLAN OPERATIVO_\INFORME_MAESTRO_ARQUEOLOGO_CREATIVO_ALBY_OJEDA.docx"
-    doc.save(output_path)
-    print(f"✅ DOCUMENTO WORD PERFECCIONADO (SIN MARKDOWN CRUDO): {output_path}")
-
-    # También actualizar el script en el repositorio
-    repo_script = r"D:\PROYECTOS\VibeCoding\Arqueologo-Creativo\scripts\generate_docx_report.py"
-    with open(repo_script, 'w', encoding='utf-8') as fp:
-        with open(__file__, 'r', encoding='utf-8') as this_fp:
-            fp.write(this_fp.read())
-    print(f"✅ Script del repositorio actualizado con el motor de parseo avanzado.")
+    doc.save(output_docx)
+    print(f"🎉 Informe Word maquetado generado con éxito: {output_docx}")
 
 if __name__ == "__main__":
-    generate_perfect_alby_docx()
+    parser = argparse.ArgumentParser(description="Compilador universal de informes Word para Arqueólogo Creativo")
+    parser.add_argument("--input", required=True, help="Ruta del archivo Markdown de entrada")
+    parser.add_argument("--output", default="Informe_Arqueologo_Creativo.docx", help="Ruta del archivo Word de salida")
+    parser.add_argument("--author", default="Creador Auditado", help="Nombre del autor o estudio")
+    args = parser.parse_args()
+
+    generate_report(args.input, args.output, args.author)
