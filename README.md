@@ -4,87 +4,55 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Language: ES/EN](https://img.shields.io/badge/Language-Spanish%20%7C%20English-blue.svg)](#)
 [![Methodology: Evidence--Based](https://img.shields.io/badge/Methodology-Evidence--Based-teal.svg)](#)
+[![Dialectic: 6--Agent%20Debate](https://img.shields.io/badge/Deliberation-6--Agent%20Dialectic-darkred.svg)](#)
 [![Security: Safe Read-Only](https://img.shields.io/badge/Security-Safe%20Read--Only-green.svg)](#)
 [![Privacy: PrivaDoc Ready](https://img.shields.io/badge/Privacy-PrivaDoc%20Integrated-purple.svg)](https://privadoc-lovat.vercel.app/)
 
-> **ESPAÑOL:** Motor de análisis forense y asignación de recursos asistido por IA para creadores, desarrolladores y solopreneurs. Escanea tu archivo histórico en **modo seguro de solo lectura**, evalúa tus activos mediante una **matriz de 10 preguntas falsables y un índice de eficiencia económica**, y genera un **Roadmap de 90 días con informe maquetado en Word (.docx)** para decidir objetivamente dónde colocar tus próximas 40 horas de trabajo.
->
-> **ENGLISH:** AI-assisted forensic portfolio audit and resource allocation engine for creators, game devs, and solopreneurs. Scans your historical vault in **safe read-only mode**, evaluates your assets via a **10-falsifiable-question matrix and an economic efficiency index**, and generates an actionable **90-day Roadmap with a styled Word (.docx) report** to objectively decide where to allocate your next 40 hours.
+---
+
+## 🇪🇸 ESPAÑOL
+
+### 📖 Descripción General
+**Arqueólogo Creativo V2.4** es un motor de análisis forense, rescate de activos y asignación de recursos asistido por IA para creadores, desarrolladores, guionistas y solopreneurs. 
+
+A diferencia de los asistentes tradicionales que construyen opiniones complacientes a partir de datos insuficientes, este sistema escanea tu archivo histórico en **modo seguro de solo lectura**, genera una **Radiografía DAFO de impacto**, somete tus proyectos a una **Batalla Dialéctica profunda entre 6 Agentes Expertos (Tesis vs Antítesis)** y calcula el **Índice de Eficiencia Económica (IE)** para entregarte un **Roadmap de 90 días con informe maquetado en Word (.docx)**.
 
 ---
 
-## 🎯 La Filosofía: Del "Tribunal de Opiniones" al "Motor de Evidencia"
-
-La mayoría de asistentes de IA construyen narrativas convincentes a partir de datos insuficientes o confunden **bajo coste de producción** con **alta probabilidad de monetización**. 
-
-El **Arqueólogo Creativo V2** erradica las opiniones subjetivas y somete cada proyecto a la cadena epistemológica estricta:
-
-$$\text{Evidencia (Dato Falsable en Disco)} \longrightarrow \text{Inferencia} \longrightarrow \text{Hipótesis de Negocio} \longrightarrow \text{Experimento de Validación (}\le \text{48h)}$$
-
----
-
-## 📐 La Matriz de las 10 Preguntas Falsables y el Índice de Eficiencia Económica (IE)
-
-Cada proyecto o activo detectado debe responder obligatoriamente a este test antes de entrar en el Roadmap:
+### 🏛️ Los 6 Agentes y la Batalla Dialéctica
+Cada proyecto y línea de negocio es sometido a un debate argumentado entre 6 perspectivas expertas:
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│ 📐 MATRIZ DE AUDITORÍA ECONÓMICA RIGUROSA (10 PREGUNTAS):                              │
+│ 🏛️ EL TRIBUNAL DIALÉCTICO DEL ARQUEÓLOGO CREATIVO:                                     │
 ├────────────────────────────────────────────────────────────────────────────────────────┤
-│ 1. ¿Qué activo físico/código existe ya en disco?                                       │
-│ 2. ¿Cuántas horas exactas de trabajo faltan para comercializarlo? (Horas)              │
-│ 3. ¿Quién es el comprador con presupuesto comprobado? (B2B solvente vs B2C no validado)│
-│ 4. ¿Cuánto es el importe unitario o contrato esperado? (€)                             │
-│ 5. ¿Cuántos días hasta el primer cobro efectivo en cuenta?                             │
-│ 6. ¿Cuál es el grado de dependencia de terceros? (Escala 1 a 10: 1=autónomo, 10=socios) │
-│ 7. ¿Existe tracción histórica o facturas previas en este canal? (Sí / No)              │
-│ 8. ¿Cuál es el coste de oportunidad respecto a las otras alternativas?                 │
-│ 9. ¿Cuál es el Índice de Eficiencia Económica (IE)?:                                   │
-│                                                                                        │
-│                      Ingreso Esperado (€) × Tracción Histórica (0.2 a 1.0)             │
-│            IE = ───────────────────────────────────────────────────────────            │
-│                         Horas Restantes × (1 + Dependencia de Terceros)                │
-│                                                                                        │
-│ 10. ¿Cuál es el experimento mínimo (≤48h) que puede falsificar la hipótesis?           │
+│ 1. 💎 IP Scout (Oportunidad): Detecta diamantes en bruto y su reencuadre a 2026.       │
+│ 2. 🎨 Crítico de Oficio (Voz Autoral): Audita la excelencia formal sin prostituirla.   │
+│ 3. 🎯 Buyer Persona (Mercado Real): Contrasta el deseo de compra B2C y viabilidad B2B.│
+│ 4. 👹 Red Team / Hater (Ataque Crítico): Destroza ilusiones, fricciones y sesgos.      │
+│ 5. 💰 Estratega Financiero (CFO): Audita facturas pasadas y exige precios de valor.    │
+│ 6. 🧠 Analista Operativo (Resolución): Fija sprints atómicos y resuelve los debates.   │
 └────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🏛️ Los 6 Marcos de Análisis Expertos / The 6 Analytical Frameworks
+### 📐 La Matriz de Asignación de Recursos y Eficiencia Económica (IE)
+Cada proyecto se evalúa matemáticamente con la fórmula:
 
-El sistema somete el corpus a 6 perspectivas analíticas complementarias:
-
-1. 💎 **IP Scout & Reencuadre de Mercado:** Detecta activos con potencial de reconversión a formatos contemporáneos (UGC, Webtoon, micro-series, flujos IA).
-2. 🎨 **Crítico de Oficio y Calidad:** Evalúa la solidez técnica, narrativa o arquitectónica del producto sin adulterar la voz autoral.
-3. 🎯 **Auditor de Buyer Persona e Inversor:** Contrasta el dolor/deseo real del cliente B2C y la viabilidad financiera para coproductores/inversores B2B.
-4. 👹 **Red Team / Fricciones de Mercado:** Expone debilidades técnicas, objeciones comerciales y puntos de abandono antes del lanzamiento.
-5. 💰 **Estratega Financiero & Pricing:** Contrasta el histórico de presupuestos (aprobados vs rechazados) y calcula el precio por valor entregado.
-6. 🧠 **Analista Operativo y de Flujo:** Mide tiempos de desarrollo, dependencias externas y hábitos de trabajo para evitar dispersiones.
+$$\text{IE} = \frac{\text{Ingreso Esperado (€)} \times \text{Tracción Histórica (0.2 a 1.0)}}{\text{Horas Restantes} \times (1 + \text{Dependencia de Terceros})}$$
 
 ---
 
-## 🛡️ Protocolo de Seguridad & Privacidad (Obligatorio)
-
-Antes de dar acceso a tus archivos al asistente:
-
-1. **📁 Regla de Copia Segura (Safe Copy):**
-   * Aunque los scripts del Arqueólogo Creativo operan estrictamente en **MODO SOLO LECTURA**, crea una carpeta de copia (ej. `Mi_Copia_Auditoria`) con tus proyectos, guiones o facturas históricas.
-2. **🔐 Anonimización Gratuita con PrivaDoc:**
-   * Si tus documentos contienen datos sensibles (nombres de clientes, DNIs, CIFs, números de cuenta o importes confidenciales), pásalos antes por la herramienta de anonimización local:
-   * 👉 **[PrivaDoc — Prueba Gratuita](https://privadoc-lovat.vercel.app/)**
+### 🛡️ Protocolo de Seguridad & Privacidad (Obligatorio)
+Antes de iniciar la auditoría:
+1. **📁 Regla de Copia Segura:** Crea una carpeta de copia (ej. `Mi_Copia_Auditoria`) con tus proyectos, guiones o facturas.
+2. **🔐 Anonimización Gratuita con PrivaDoc:** Si tus documentos contienen datos sensibles (CIFs, DNIs, nombres o importes), pásalos antes por:
+   👉 **[PrivaDoc — Prueba Gratuita Local](https://privadoc-lovat.vercel.app/)**
 
 ---
 
-## 🚀 Cómo Usar / How to Use
-
-### Opción 1: En tu Asistente de IA (Claude Code, ChatGPT Workspace, Cursor, Antigravity)
-1. Clona este repositorio o añade la carpeta `skills/arqueologo-creativo` a tu entorno.
-2. Pídele a tu IA:
-   > *"Actúa como el Arqueólogo Creativo siguiendo la skill de este repositorio. Guíame paso a paso para auditar mi carpeta de proyectos y facturas."*
-3. La IA te mostrará el protocolo de seguridad, escaneará los archivos, realizará la **entrevista de calibración de contexto** y aplicará la matriz de eficiencia económica.
-
-### Opción 2: Mediante Scripts en Terminal
+### 🚀 Cómo Usar
 ```bash
 # 1. Instalar dependencias para generar el Word
 pip install python-docx
@@ -92,36 +60,90 @@ pip install python-docx
 # 2. Ejecutar el escaneo seguro de solo lectura
 python scripts/safe_scanner.py --path "D:/Mi_Copia_Auditoria" --output "inventario.json"
 
-# 3. Generar el informe maquetado en Word (.docx) tras completar la auditoría
+# 3. Generar el informe maquetado en Word (.docx) tras la deliberación
 python scripts/generate_docx_report.py --input "INFORME_ARQUEOLOGO_CREATIVO.md" --output "Informe_Auditoria.docx" --author "Tu Nombre"
 ```
 
 ---
+---
 
-## 📦 Estructura del Repositorio / Project Structure
+## 🇬🇧 ENGLISH
+
+### 📖 General Overview
+**Creative Archaeologist V2.4** is an AI-assisted forensic portfolio audit, asset recovery, and resource allocation engine for creators, indie game developers, screenwriters, and solopreneurs.
+
+Unlike traditional assistants that generate flattering narratives from insufficient data, this system scans your historical vault in **safe read-only mode**, produces an **impactful SWOT radiograph**, subjects your projects to a **deep Dialectical Battle among 6 Expert Agents (Thesis vs Antithesis)**, and calculates the **Economic Efficiency Index (IE)** to deliver an actionable **90-day Roadmap with a styled Word (.docx) report**.
+
+---
+
+### 🏛️ The 6 Agents & The Dialectical Battle
+Every project and revenue stream is subjected to an exhaustive debate among 6 expert perspectives:
+
+```text
+┌────────────────────────────────────────────────────────────────────────────────────────┐
+│ 🏛️ THE DIALECTICAL TRIBUNAL OF THE CREATIVE ARCHAEOLOGIST:                             │
+├────────────────────────────────────────────────────────────────────────────────────────┤
+│ 1. 💎 IP Scout (Opportunity): Unearths raw diamonds and modern market reframing.       │
+│ 2. 🎨 Master Craft Critic (Authorial Voice): Audits technical and aesthetic quality.   │
+│ 3. 🎯 Buyer Persona (Real Market): Contrasts B2C willingness to pay & B2B viability.  │
+│ 4. 👹 Red Team / Hater (Critical Attack): Destroys false illusions, risks & frictions. │
+│ 5. 💰 Financial Strategist (CFO): Audits historical invoices & enforces value pricing. │
+│ 6. 🧠 Operational Analyst (Synthesis): Establishes atomic sprints & resolves debates.  │
+└────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+### 📐 Resource Allocation Matrix & Economic Efficiency Index (IE)
+Every project is mathematically evaluated via the formula:
+
+$$\text{IE} = \frac{\text{Expected Revenue (€)} \times \text{Historical Traction (0.2 to 1.0)}}{\text{Remaining Hours} \times (1 + \text{Third-Party Dependency})}$$
+
+---
+
+### 🛡️ Mandatory Security & Privacy Protocol
+Before granting folder access:
+1. **📁 Safe Copy Rule:** Create a duplicate folder (e.g., `My_Audit_Copy`) containing your projects, scripts, or historical invoices.
+2. **🔐 Free Anonymization with PrivaDoc:** If your files contain sensitive data (client names, IDs, accounts, or confidential fees), run them through:
+   👉 **[PrivaDoc — Free Local Anonymizer](https://privadoc-lovat.vercel.app/)**
+
+---
+
+### 🚀 How to Run
+```bash
+# 1. Install dependencies for Word report generation
+pip install python-docx
+
+# 2. Run safe read-only forensic scanner
+python scripts/safe_scanner.py --path "D:/My_Audit_Copy" --output "inventory.json"
+
+# 3. Generate the styled Word (.docx) report after agent deliberation
+python scripts/generate_docx_report.py --input "CREATIVE_ARCHAEOLOGIST_REPORT.md" --output "Audit_Report.docx" --author "Your Name"
+```
+
+---
+
+## 📦 Estructura / Repository Structure
 
 ```text
 Arqueologo-Creativo/
-├── agents/                           # Marcos de análisis de los 6 agentes evaluadores
-│   ├── 01_ip_scout.md                # El Cazatalentos & Reencuadrador Moderno
-│   ├── 02_art_critic.md              # El Crítico Artístico & de Oficio
-│   ├── 03_buyer_persona_investor.md  # El Comodín de Buyer Persona & Inversor
-│   ├── 04_hater_red_team.md          # El 'Hater' / Red Team
-│   ├── 05_financial_pricing_strategist.md # El Estratega Financiero & Pricing
-│   └── 06_operational_psychologist.md# El Analista Operativo & de Flujo
+├── agents/                           # Prompts y directrices de debate de los 6 agentes
+│   ├── 01_ip_scout.md                # IP Scout / Cazatalentos
+│   ├── 02_art_critic.md              # Crítico Artístico y de Oficio
+│   ├── 03_buyer_persona_investor.md  # Buyer Persona & Inversor
+│   ├── 04_hater_red_team.md          # Red Team / Hater
+│   ├── 05_financial_pricing_strategist.md # Estratega Financiero & Pricing
+│   └── 06_operational_psychologist.md# Analista Operativo & de Flujo
 ├── scripts/                          # Scripts de automatización seguros
 │   ├── safe_scanner.py               # Escáner forense 100% de solo lectura
-│   └── generate_docx_report.py       # Compilador de informes Word (.docx) con estilo editorial
+│   └── generate_docx_report.py       # Compilador de informes Word (.docx) maquetados
 ├── skills/
 │   └── arqueologo-creativo/
-│       └── SKILL.md                  # Protocolo orquestador riguroso basado en evidencia
-└── README.md                         # Documentación maestra (ES / EN)
+│       └── SKILL.md                  # Procedimiento orquestador con debate dialéctico
+└── README.md                         # Documentación maestra bilingüe (ES / EN)
 ```
 
 ---
 
 ## 📜 Licencia / License
-
-Distribuido bajo la Licencia **MIT**. Consulta `LICENSE` para más información.
-
-Diseñado con criterio riguroso por **Alby Ojeda** & **Antigravity**. 💎👑
+MIT License. Creado por **Alby Ojeda** & **Antigravity**. 💎👑
